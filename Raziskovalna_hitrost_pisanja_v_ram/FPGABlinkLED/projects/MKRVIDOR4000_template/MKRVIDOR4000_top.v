@@ -157,47 +157,20 @@ SYSTEM_PLL PLL_inst(
   .c4(wFLASH_CLK),
     
   .locked());
-/*
-timer timer_inst
-	(
-	.clock(bMKR_D[4]),//wOSC_CLK 
-	.inp1(bMKR_D[0]),
-	.inp2(bMKR_D[1]),
-	.y1(bMKR_D[2]),
-	.y2(bMKR_D[9])
-	);
-*/
-VGA_GAME VGA_GAME_inst
+
+  //prikaz kar je v ramu na zaslon
+VGA_640x480 VGA_640x480_inst
 	(
 	.clock(wCLK120),//wOSC_CLK 
 	.red_F(bMKR_D[6]),
 	.green_F(bMKR_D[7]),
 	.blue_F(bMKR_D[8]),
 	.hsync(bMKR_D[4]),
-	.vsync(bMKR_D[5]),
-	.inp1(bMKR_D[0]),
-	.inp2(bMKR_D[1]),
-	.inp3(bMKR_D[9]),
-	.inp4(bMKR_D[2])
+	.vsync(bMKR_D[5])
 	);
 	
-//game_object game_object_inst
-	//(
-	//.clock(wCLK120),//wOSC_CLK 
-	//.red(R1),
-	//.green(G1),
-	//.blue(B1),
-	//.hsync(HS1),
-	//.vsync(VS1)
-	//);
+
 	
-//assign bMKR_D[6] =  R1;
-//assign bMKR_D[7] = G1;
-//assign bMKR_D[8] = B1;
-
-//assign bMKR_D[4] = HS && HS1;
-//assign bMKR_D[5] = VS && VS1;
-
 
 
 reg [5:0] rRESETCNT;

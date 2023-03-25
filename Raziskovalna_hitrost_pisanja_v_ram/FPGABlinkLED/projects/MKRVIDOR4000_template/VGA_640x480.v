@@ -1,11 +1,12 @@
 `timescale 1ns / 1ps
-module VGA_GAME(
+module VGA_640x480(
   input clock,
   output reg [0:0 ] red_F, 
   output reg [0:0 ] green_F, 
   output reg [0:0 ] blue_F,
   output reg hsync, 
   output reg vsync
+
 );
 
 
@@ -16,7 +17,6 @@ reg [9:0] vcount = 0;
 reg [1:0] counter = 0;
 
 reg enable;
-
 
 // sinhronizacija VGA zaslona
 always @ (posedge clock)
@@ -80,10 +80,6 @@ begin
 	end
 end 
 	
-
-// upravljanje layerjev
-
-
 
 	
 endmodule
