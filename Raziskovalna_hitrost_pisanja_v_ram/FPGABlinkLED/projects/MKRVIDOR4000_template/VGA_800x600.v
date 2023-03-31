@@ -58,7 +58,43 @@ end
 
 
 //Testni prikaz kocke
+reg rgb = 10101;
+reg vrednost;
+reg RGB = 01010;
 
+
+always @ (posedge clock)
+begin
+  if (enable)
+	if(vrednost == 3)begin
+		vrednost <= 0;
+	end
+	else 
+	begin
+		vrednost = vrednost +1;
+	end
+	
+
+
+ 
+	if (hcount > 200 && hcount < 635 && vcount > 200 && vcount < 475) begin
+	   green_F <= rgb >> vrednost;
+      blue_F  <= 1'b1; 
+      red_F   <= RGB >> vrednost;
+	 end 
+	 else if (hcount > 10 && hcount < 200 && vcount > 200 && vcount < 475) begin
+	   green_F <= 1'b0;
+      blue_F  <= 1'b0; 
+      red_F   <= 1'b1;
+	 end 
+	 else begin
+	   green_F <= 1'b0;
+      blue_F <= 1'b0; 
+      red_F <= 1'b0;
+	 end
+
+end 
+/*
 always @ (posedge clock)
 begin
  if (enable)begin
@@ -74,7 +110,7 @@ begin
 	 end
 	end
 end 
-	
+	*/
 endmodule
 
 

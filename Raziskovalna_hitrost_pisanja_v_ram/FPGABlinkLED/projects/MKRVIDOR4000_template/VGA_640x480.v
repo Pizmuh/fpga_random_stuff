@@ -5,7 +5,8 @@ module VGA_640x480(
   output reg [0:0 ] green_F, 
   output reg [0:0 ] blue_F,
   output reg hsync, 
-  output reg vsync
+  output reg vsync,
+  input reg RdData
 
 );
 
@@ -63,14 +64,41 @@ end
 
 //Testni prikaz kocke 
 
+/*
+  true_dual_port_ram_dual_clock true_dual_port_ram_dual_clock_inst
+	(
+	.clk_a(clock),//wOSC_CLK 
+	.data_a(data_a),
+	.addr_a(addr_a),
+	.we_a(we_a),
+	.q_a(q_a)
+	
+	);
+
+reg we_a = 0;
+reg data_a ;
+reg addr_a = 6'b000001;
+*/
+reg rgb = 1101;
+reg vrednost;
+
+
 
 always @ (posedge clock)
 begin
  if (enable)begin
+
+
+ 
 	if (hcount > 200 && hcount < 635 && vcount > 200 && vcount < 475) begin
-	   green_F <= 1'b1;
+	   green_F <= RdData ;
+      blue_F  <= RdData>>1; 
+      red_F   <= RdData;
+	 end 
+	 else if (hcount > 10 && hcount < 200 && vcount > 200 && vcount < 475) begin
+	   green_F <= 1'b1 ;
       blue_F  <= 1'b1; 
-      red_F   <= 1'b1;
+      red_F   <= RdData;
 	 end 
 	 else begin
 	   green_F <= 1'b0;
