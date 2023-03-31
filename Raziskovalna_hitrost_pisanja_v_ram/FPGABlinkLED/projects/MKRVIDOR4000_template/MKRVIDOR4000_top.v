@@ -178,15 +178,19 @@ reg  [15:0] stet;
 always @ (posedge oSDRAM_CLK)
 begin
 	stet <= stet + 1;
-	if (bMKR_D[1]==0)
+	if (bMKR_D[0]==0)
 	begin
-		 WrData	<= 0000000000000000;
+		 WrData	<= 0000000000000011;
+	end
+	else 	if (bMKR_D[1]==0)
+	begin
+		WrData	<= 0000000000000010;
 	end
 	else
-	 WrData	<= 0000000000000001;
+	 WrData	<= 0000000000000000;
 end
 
-wire WrReq = stet<<15;
+wire WrReq = stet [0:0];
 reg RdGnt;
 reg [11:0] WrAddr = 000000000000;
 reg [15:0] WrData;

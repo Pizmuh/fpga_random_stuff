@@ -6,7 +6,7 @@ module VGA_640x480(
   output reg [0:0 ] blue_F,
   output reg hsync, 
   output reg vsync,
-  input reg RdData
+  input  reg  [15:0] RdData
 
 );
 
@@ -79,8 +79,6 @@ reg we_a = 0;
 reg data_a ;
 reg addr_a = 6'b000001;
 */
-reg rgb = 1101;
-reg vrednost;
 
 
 
@@ -96,8 +94,8 @@ begin
       red_F   <= RdData;
 	 end 
 	 else if (hcount > 10 && hcount < 200 && vcount > 200 && vcount < 475) begin
-	   green_F <= 1'b1 ;
-      blue_F  <= 1'b1; 
+	   green_F <= RdData>>1;
+      blue_F  <= RdData>>1; 
       red_F   <= RdData;
 	 end 
 	 else begin
