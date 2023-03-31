@@ -157,49 +157,78 @@ SYSTEM_PLL PLL_inst(
   .c4(wFLASH_CLK),
     
   .locked());
-/*
-timer timer_inst
-	(
-	.clock(bMKR_D[4]),//wOSC_CLK 
-	.inp1(bMKR_D[0]),
-	.inp2(bMKR_D[1]),
-	.y1(bMKR_D[2]),
-	.y2(bMKR_D[9])
-	);
-*/
-VGA_GAME VGA_GAME_inst
+
+  //prikaz kar je v ramu na zaslon
+VGA_640x480 VGA_640x480_inst
 	(
 	.clock(wCLK120),//wOSC_CLK 
 	.red_F(bMKR_D[6]),
-	.green_F(bMKR_D[7]),
-	.blue_F(bMKR_D[8]),
+	.green_F(bMKR_D[8]),
+	.blue_F(bMKR_D[7]),
 	.hsync(bMKR_D[4]),
 	.vsync(bMKR_D[5]),
-	.inp1(bMKR_D[0]),
-	.inp2(bMKR_D[1]),
-	.inp3(bMKR_D[9]),
-	.inp4(bMKR_D[2])
+	.RdData(RdData)
+	
+	
 	);
 	
-//game_object game_object_inst
-	//(
-	//.clock(wCLK120),//wOSC_CLK 
-	//.red(R1),
-	//.green(G1),
-	//.blue(B1),
-	//.hsync(HS1),
-	//.vsync(VS1)
-	//);
 	
-//assign bMKR_D[6] =  R1;
-//assign bMKR_D[7] = G1;
-//assign bMKR_D[8] = B1;
 
-//assign bMKR_D[4] = HS && HS1;
-//assign bMKR_D[5] = VS && VS1;
+reg  [15:0] stet;
+always @ (posedge oSDRAM_CLK)
+begin
+	stet <= stet + 1;
+	if (bMKR_D[0]==0)
+	begin
+		 WrData	<= 0000000000000011;
+	end
+	else 	if (bMKR_D[1]==0)
+	begin
+		WrData	<= 0000000000000010;
+	end
+	else
+	 WrData	<= 0000000000000000;
+end
+
+wire WrReq = stet [0:0];
+reg RdGnt;
+reg [11:0] WrAddr = 000000000000;
+reg [15:0] WrData;
+reg [11:0] RdAddr = 000000000000;
+reg [15:0] RdData;
+
+
+	//prikaz kar je v ramu na zaslon
+SDRAM_ctrl SDRAM_ctrl_inst
+	(
+	.clk(oSDRAM_CLK),//wOSC_CLK
+//read agent	
+	.RdReq(!WrReq),
+	.RdGnt(),
+	.RdAddr(RdAddr),
+	.RdData(RdData),
+	.RdDataValid(),
+//Write agent
+	.WrReq(WrReq),
+	.WrGnt(WrGnt),
+	.WrAddr(WrAddr),
+	.WrData(WrData),
+//sdram
+	.SDRAM_CKE(oSDRAM_CKE),
+	.SDRAM_WEn(oSDRAM_WEn),
+	.SDRAM_CASn(oSDRAM_CASn),
+	.SDRAM_RASn(oSDRAM_RASn),
+	.SDRAM_A(oSDRAM_ADDR),
+	.SDRAM_BA(oSDRAM_BA),
+	.SDRAM_DQM(oSDRAM_DQM),
+	.SDRAM_DQ(bSDRAM_DQ)
+	);
 
 
 
+
+
+	
 reg [5:0] rRESETCNT;
 
 always @(posedge wMEM_CLK)
