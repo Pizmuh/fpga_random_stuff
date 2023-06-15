@@ -17,7 +17,7 @@ assign layer = 1;
 
 
 
-/// Slikica na zaslonu v bistvu ozadje
+/// Slikmica na zaslonu v bistvu ozadje
 
 always @ (posedge clock)
 begin
