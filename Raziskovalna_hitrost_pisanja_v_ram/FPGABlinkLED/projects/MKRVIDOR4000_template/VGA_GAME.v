@@ -191,7 +191,12 @@ begin
 		 green_F <= G6;
 		 blue_F <= B6;
     end
-	 
+	/* else if ((R7 != 0) || (G7 != 0) || (B7 != 0))
+    begin
+       red_F <= R7;
+		green_F <= G7;
+		blue_F <= B7;
+    end */
 	 else
 	 begin
 		red_F <= 1'b0;
