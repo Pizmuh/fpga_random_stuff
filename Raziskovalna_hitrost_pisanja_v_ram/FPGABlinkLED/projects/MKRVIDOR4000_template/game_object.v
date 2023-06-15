@@ -62,7 +62,7 @@ begin
 	 begin
 		if ((inp1 == 0) && (count < 380)) // 480
 		begin
-			count <= count + 3 ;
+			count <= count + 3;
 		end
 		else if ((inp2 == 0) && !(count == 0))
 		begin
@@ -72,7 +72,7 @@ begin
 	
 	if (ppsy) begin
 		county = county + 1 ;
-        //… things to do once per second 1 = 50 000 000 …
+        //… things to do nce per second 1 = 50 000 000 …
     end
 	 
 end

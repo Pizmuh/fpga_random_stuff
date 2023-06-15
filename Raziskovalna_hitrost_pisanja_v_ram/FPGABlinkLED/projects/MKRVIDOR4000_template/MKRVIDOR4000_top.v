@@ -167,18 +167,18 @@ timer timer_inst
 	.y2(bMKR_D[9])
 	);
 */
-VGA_GAME VGA_GAME_inst
+		VGA_GAME VGA_GAME_inst
 	(
 	.clock(wCLK120),//wOSC_CLK 
-	.red_F(bMKR_D[6]),
-	.green_F(bMKR_D[7]),
-	.blue_F(bMKR_D[8]),
-	.hsync(bMKR_D[4]),
-	.vsync(bMKR_D[5]),
-	.inp1(bMKR_D[0]),
-	.inp2(bMKR_D[1]),
-	.inp3(bMKR_D[9]),
-	.inp4(bMKR_D[2])
+	.red_F(bMKR_D[2]),
+	.green_F(bMKR_D[1]),
+	.blue_F(bMKR_D[0]),
+	.hsync(bMKR_D[5]),
+	.vsync(bMKR_D[4]),
+	.inp1(bMKR_D[6]),
+	.inp2(bMKR_D[8]),
+	.inp3(bMKR_D[7]),
+	.inp4(bMKR_D[9])
 	);
 	
 //game_object game_object_inst

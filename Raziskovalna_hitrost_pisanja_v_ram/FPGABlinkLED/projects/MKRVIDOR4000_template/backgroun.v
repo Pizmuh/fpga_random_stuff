@@ -14,7 +14,6 @@ module background(
 assign layer = 0;
 
 
-
 /// Slikica na zaslonu v bistvu ozadje
 always @ (posedge clock)
 begin

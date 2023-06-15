@@ -11,21 +11,32 @@ module malderbrot(
  
 );
 
+ //Število iteracij preden se odločim odnehati
+
+//reg [7:0] zaslon [100:0][100:0]; 
+
+
 reg layer = 100; //Število iteracij preden se odločim odnehati
 
 //reg [7:0] zaslon [100:0][100:0]; 
 reg [9:0] c = 3;
-reg [9:0] a = 0;
-reg [9:0] b = 0;
+reg signed [9:0] a = 0;
+reg signed [9:0] b = 0;
+reg [9:0] x = 0;
+reg [9:0] y = 0;
+reg [9:0] x1 = 0;
+reg [9:0] y1 = 0;
+reg [10:0] konec = 0;
 
 reg [1:0] sub_px = 0;
-
+reg [1:0] barva = 0;
+reg [10:0] iteration = 255;
 
 /// Slikica na zaslonu v bistvu ozadje
 
 always @ (posedge clock)
 begin
-
+ if (enable)
   
   sub_px <= sub_px + 1;
   /* 
@@ -48,25 +59,42 @@ begin
       blue <= 2'b00; 
       red <= 3'b000;
     end*/
-	 a <= hcount - 640/2 -timer;
-	 b <= vcount - 480/2;
+	 a <= (hcount - 800/2) ;//-timer;
+	 b <= (-(vcount - 600/2));
 	 //for (int i = 0; i< layer; i++)begin
-		
+	 x <= a;
+	 y<= b;
+	 x1 <= a;
+	 y1 <= b;
+	 for (  konec = 0; konec<=10; konec++)begin
+	 if ((a*a+b*b )<=(400))begin
+		barva <= 1'b1;
+		end
+	 else
+		begin
+		barva <= 1'b0;
+		a<= a*a+ b*b;
+		b <= 2 * a * b;
+		end
+	end
+	
+	
 	 //end
-	if (hcount > 5 && hcount < 635 && vcount > 5 && vcount < 475) begin
+	if (hcount > 0 && hcount < 800 && vcount > 0 && vcount < 600) begin
 	 //green <= timer>>10 + a;//{timer[2:0], timer[15:3]}
 	   //a <= a - timer;
-	   green <= (a & 2'b11 >= sub_px);
-      blue  <= 1'b0; 
-      red   <= 1'b0;
+	   green <= 2'b10 == sub_px;//(a & 2'b01 >= sub_px);
+      blue  <= 1'b1;//barva; 
+      red   <= 1'b1;
 	 end 
 	 else begin
 	   green <= 1'b0;
       blue <= 1'b0; 
       red <= 1'b0;
 	 end
+ end
 
-end 
+
 
 
 /*

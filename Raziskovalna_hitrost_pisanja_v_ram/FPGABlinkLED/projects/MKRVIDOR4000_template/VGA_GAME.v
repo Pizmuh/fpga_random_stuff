@@ -59,21 +59,23 @@ reg L6;
 
 reg maks = 5; ///maksimalen score
 
-reg [9:0] score1;
-reg [9:0] score2;
+reg [3:0] score1;
+reg [3:0] score2;
 
-reg [9:0] hcount = 0;
-reg [9:0] vcount = 0;
+reg [11:0] hcount = 0;
+reg [11:0] vcount = 0;
 reg [1:0] counter = 0;
-
 reg enable;
+
+
+
 
 reg COLOUR_DATA = 0;
 
 // sinhronizacija VGA zaslona
 always @ (posedge clock)
 begin
-  if (counter == 3)
+  if (counter == 2)
   begin
     counter <= 1'b0;
     enable <= 1'b1;
@@ -89,23 +91,23 @@ always @(posedge clock)
 begin
   if (enable == 1)
   begin
-    if(hcount == 799)
+    if(hcount == 1055)
     begin
       hcount <= 0;
-      if(vcount == 524)
-        vcount <= 0;
+		if(vcount == 627)
+		  vcount <= 0;
       else 
         vcount <= vcount+1'b1;
     end
     else
       hcount <= hcount+1'b1;
 
-  if (vcount >= 490 && vcount < 492) 
+  if (vcount >= 601 && vcount < 605) 
     vsync <= 1'b0;
   else
     vsync <= 1'b1;
 
-  if (hcount >= 656 && hcount < 752) 
+  if (hcount >= 840 && hcount < 968) 
     hsync <= 1'b0;
   else
     hsync <= 1'b1;
@@ -189,12 +191,7 @@ begin
 		 green_F <= G6;
 		 blue_F <= B6;
     end
-	 else if ((R7 != 0) || (G7 != 0) || (B7 != 0))
-    begin
-       red_F <= R7;
-		 green_F <= G7;
-		 blue_F <= B7;
-    end
+	 
 	 else
 	 begin
 		red_F <= 1'b0;
@@ -269,7 +266,7 @@ background background_inst
 	.enable(enable),
 	.layer(L2)
 	);
-	malderbrot malderbrot_inst
+malderbrot malderbrot_inst
 	(
 	.clock(clock),
 	.red(R7),
