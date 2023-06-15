@@ -1,5 +1,0 @@
-
-
-C:/Users/Simon Lipov?ek/OneDrive/Namizje/school/4. letnik/Matura/FPGA/sheme/quartzus_pocitnice_v_decembru/VGA_chirule_charule/FPGABlinkLED/ip/SYSTEM_PLL/SYSTEM_PLL.v
-
-Jan 16 09AM:48:03>: File C:/Users/Simon Lipov?ek/OneDrive/Namizje/school/4. letnik/Matura/FPGA/sheme/quartzus_pocitnice_v_decembru/VGA_chirule_charule/FPGABlinkLED/ip/SYSTEM_PLL/SYSTEM_PLL.cnxerr could not be opened
